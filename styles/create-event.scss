@@ -1,0 +1,30 @@
+.create-event__close-btn {
+  border: none;
+  transform: rotate(45deg);
+  margin-left: 400px;
+  background-color: #fff;
+}
+.event-form {
+  display: flex;
+  flex-direction: column;
+  &__field {
+    border: none;
+    margin-top: 15px;
+    &:focus {
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #4000ff3b;
+    }
+  }
+  &__submit-btn {
+    margin-top: 15px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    background-color: #4000ff3b;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
