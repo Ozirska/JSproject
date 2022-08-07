@@ -2,21 +2,19 @@ import { getItem } from "../common/storage.js";
 import { generateWeekRange } from "../common/time.utils.js";
 import openModal from "../common/modal.js";
 
-// console.log(generateWeekRange(getItem("displayedWeekStart")));
-
 const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 const dateOfWeek = [];
 
 const headerWeekDay = () => {
-  generateWeekRange(new Date()).map((weekDate) =>
+  generateWeekRange(getItem("displayedWeekStart")).map((weekDate) =>
     dateOfWeek.push([daysOfWeek[weekDate.getDay()], weekDate.getDate()])
   );
 };
-headerWeekDay();
 
 const headeLine = document.querySelector(".calendar__header");
 
 export const renderHeader = () => {
+  console.log(headerWeekDay());
   const weekLine = dateOfWeek
     .map(
       (day) =>
@@ -34,7 +32,6 @@ export const renderHeader = () => {
   // полученную разметку вставить на страницу с помощью innerHTML в .calendar__header
   // в дата атрибуте каждой ячейки должно хранить для какого часа эта ячейка
 };
-renderHeader();
 
 const btnCreate = document.querySelector(".create-event-btn");
 btnCreate.addEventListener("click", openModal);
