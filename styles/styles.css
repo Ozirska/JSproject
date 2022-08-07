@@ -74,11 +74,16 @@
 .calendar {
   padding: 15px;
 }
-
 .calendar__header {
+  padding-left: 60px;
   width: 100%;
   display: flex;
   flex-wrap: nowrap;
+}
+.calendar__body {
+  padding-right: 15px;
+  width: 100%;
+  display: flex;
 }
 
 .calendar__day-label {
@@ -87,9 +92,40 @@
   text-align: center;
   justify-content: center;
   justify-content: space-around;
-  flex-grow: 1;
+  width: 250px;
   height: 128px;
-  border: 1px solid #690069;
+}
+
+.time-slot {
+  height: 60px;
+  width: 60px;
+  padding-top: 47px;
+  padding-right: 5px;
+  text-align: right;
+}
+
+.calendar__week-container {
+  width: 100%;
+  display: flex;
+}
+
+.calendar__week {
+  padding-right: 45px;
+  display: flex;
+  width: 100%;
+}
+.calendar__day {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+.calendar__time-slot {
+  height: 60px;
+  border-left: 1px solid #7c7c7c;
+  border-bottom: 1px solid #7c7c7c;
+}
+.calendar__time-slot-min {
+  height: 10px;
 }
 
 .create-event__close-btn {
@@ -131,6 +167,8 @@
 
 body {
   font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
   font-family: "Roboto", sans-serif;
 }
 
