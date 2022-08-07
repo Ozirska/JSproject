@@ -2,13 +2,17 @@
 
 .calendar {
   padding: 15px;
-}
-
-.calendar__header {
-  width: 100%;
-  display: flex;
-
-  flex-wrap: nowrap;
+  &__header {
+    padding-left: 60px;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  &__body {
+    padding-right: 15px;
+    width: 100%;
+    display: flex;
+  }
 }
 
 .calendar__day-label {
@@ -17,7 +21,6 @@
   text-align: center;
   justify-content: center;
   justify-content: space-around;
-  flex-grow: 1;
+  width: 250px;
   height: 128px;
-  border: 1px solid rgb(105, 0, 105);
 }
