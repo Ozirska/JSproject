@@ -3,19 +3,19 @@ import { generateWeekRange } from "../common/time.utils.js";
 import openModal from "../common/modal.js";
 
 const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-const dateOfWeek = [];
 
 const headerWeekDay = () => {
+  const dateOfWeek = [];
   generateWeekRange(getItem("displayedWeekStart")).map((weekDate) =>
     dateOfWeek.push([daysOfWeek[weekDate.getDay()], weekDate.getDate()])
   );
+  return dateOfWeek;
 };
 
 const headeLine = document.querySelector(".calendar__header");
 
 export const renderHeader = () => {
-  console.log(headerWeekDay());
-  const weekLine = dateOfWeek
+  const weekLine = headerWeekDay()
     .map(
       (day) =>
         `<div class="calendar__day-label day-label">
@@ -25,6 +25,7 @@ export const renderHeader = () => {
 
     .join("");
 
+  headeLine.innerHTML = "";
   headeLine.innerHTML = weekLine;
 
   // на основе displayedWeekStart из storage с помощью generateWeekRange сформируйте массив дней текущей недели
