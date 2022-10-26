@@ -46,14 +46,6 @@
   z-index: 10;
 }
 
-.popup__content {
-  position: absolute;
-  background: #fff;
-  padding: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
 .hidden {
   display: none;
 }
@@ -115,6 +107,7 @@
   width: 100%;
 }
 .calendar__day {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 250px;
@@ -158,6 +151,43 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
+}
+
+.calendar__time-slot {
+  position: relative;
+}
+
+.event__content {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100px;
+  border-radius: 20px;
+  background-color: #369c9c;
+  position: absolute;
+  z-index: 10;
+}
+.event__content-span {
+  background: none;
+  margin: 5px;
+  color: azure;
+  font-size: 30px;
+}
+
+.popup__content {
+  width: 200px;
+  height: 50px;
+  position: relative;
+  z-index: 11;
+}
+
+.delete-event-btn {
+  width: 200px;
+  height: 50px;
+  background-color: azure;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 20px;
 }
 
 * {
