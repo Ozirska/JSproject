@@ -1,6 +1,7 @@
 import { getItem, setItem } from "../common/storage.js";
 import shmoment from "../common/shmoment.js";
 import { openPopup, closePopup } from "../common/popup.js";
+import { renderWeek } from "../calendar/calendar.js";
 
 const weekElem = document.querySelector(".calendar__week");
 const deleteEventBtn = document.querySelector(".delete-event-btn");
@@ -11,15 +12,14 @@ function handleEventClick(event) {
   if (!isEvent && !isEventContent) {
     return;
   }
-  // console.log(isEventContent);
-  // when click on span don't work
 
   let eventId;
   eventId = event.target.dataset.eventId;
-  console.log(eventId);
   setItem("eventIdToDelete", eventId);
-  console.log(getItem("eventIdToDelete"));
-  openPopup(event.pageX, event.pageY);
+  // openPopup(event.pageX, event.pageY);
+  const { x, y } = event;
+  openPopup(x, y);
+
   // если произошел клик по событию, то нужно паказать попап с кнопкой удаления
   // установите eventIdToDelete с id события в storage
 }
@@ -29,7 +29,6 @@ function removeEventsFromCalendar() {
   events.length = 0;
 
   setItem("events", events);
-  // ф-ция для удаления всех событий с календаря
 }
 
 const createEventElement = (event) => {
@@ -93,23 +92,18 @@ export const renderEvents = () => {
   let calendarTimeSlot = document.querySelectorAll(".calendar__day");
 
   thisWeekEvents.map((eventFromArr) => {
-    [...calendarTimeSlot].map((el) => {
-      if (Number(el.dataset.day) === eventFromArr.start.getDate()) {
+    [...calendarTimeSlot].map((calendarDay) => {
+      if (Number(calendarDay.dataset.day) === eventFromArr.start.getDate()) {
         let min = String(eventFromArr.start.getHours());
 
-        let g = el.querySelectorAll("div");
+        let divInsideCalendarDay = calendarDay.querySelectorAll("div");
 
-        [...g].map((elem) => {
-          // elem.removeChild(elem);
-          // elem.append(domElem);
-          console.log(elem);
-
+        [...divInsideCalendarDay].map((elem) => {
           if (elem.dataset.min === min) {
             let domElem = createEventElement(eventFromArr);
             elem.append(domElem);
           }
         });
-        // let g = el.querySelector(`div[data-min= "'${min}'"]`);
       }
     });
   });
@@ -130,15 +124,11 @@ function onDeleteEvent() {
   let newArrEvents = ArrEvents.filter((el) => {
     return String(el.id) !== String(eventIdToDelete);
   });
-  console.log(newArrEvents);
 
   setItem("events", newArrEvents);
   closePopup();
-  console.log(getItem("events"));
+  renderWeek();
   renderEvents();
-
-  console.log("done");
-  // do not check!!!!!
 
   // достаем из storage массив событий и eventIdToDelete
   // удаляем из массива нужное событие и записываем в storage новый массив
