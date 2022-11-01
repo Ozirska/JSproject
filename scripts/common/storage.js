@@ -18,14 +18,20 @@ let storage = {
 
 export const setItem = (key, value) => {
   // ф-ция должна устанавливать значения в объект storage ++
-  return (storage[key] = value);
+  return localStorage.setItem(key, JSON.stringify(value));
 };
 
 export const getItem = (key) => {
-  return storage[key];
+  let newValue;
+  try {
+    newValue = JSON.parse(localStorage.getItem(key));
+  } catch (e) {
+    newValue = localStorage.key;
+  }
+  return newValue;
   // ф-ция должна возвращать по ключу значения из объекта storage ++
 };
-
+console.log(getItem("events"));
 // пример объекта события
 
 const eventExample = {

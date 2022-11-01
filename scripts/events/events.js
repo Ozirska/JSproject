@@ -7,14 +7,18 @@ const weekElem = document.querySelector(".calendar__week");
 const deleteEventBtn = document.querySelector(".delete-event-btn");
 
 function handleEventClick(event) {
-  const isEvent = event.target.classList.contains("event__content");
-  const isEventContent = event.target.classList.contains("event__content-span");
-  if (!isEvent && !isEventContent) {
+  // const isEvent = event.target.classList.contains("event__content");
+  // const isEventContent = event.target.classList.contains("event__content-span");
+  // if (!isEvent && !isEventContent) {
+  //   return;
+  // }
+  const eventElem = event.target.closest(".event__content");
+  if (!eventElem) {
     return;
   }
 
   let eventId;
-  eventId = event.target.dataset.eventId;
+  eventId = event.target.closest(".event__content").dataset.eventId;
   setItem("eventIdToDelete", eventId);
   // openPopup(event.pageX, event.pageY);
   const { x, y } = event;
@@ -25,7 +29,7 @@ function handleEventClick(event) {
 }
 
 function removeEventsFromCalendar() {
-  let events = getItem("events");
+  let events = getItem("events") || [];
   events.length = 0;
 
   setItem("events", events);
@@ -37,14 +41,16 @@ const createEventElement = (event) => {
     minute: "2-digit",
   });
 
-  let minutsInStart = event.start.getHours() * 60 + event.start.getMinutes();
-  let minutsInEnd = event.end.getHours() * 60 + event.end.getMinutes();
+  let minutsInStart =
+    new Date(event.start).getHours() * 60 + new Date(event.start).getMinutes();
+  let minutsInEnd =
+    new Date(event.end).getHours() * 60 + new Date(event.end).getMinutes();
   let diferenceInMinuts = minutsInEnd - minutsInStart;
 
   let createEventElem = document.createElement("div");
 
-  let startTime = options.format(event.start);
-  let endTime = options.format(event.end);
+  let startTime = options.format(new Date(event.start));
+  let endTime = options.format(new Date(event.end));
   let time = `${startTime} - ${endTime}`;
 
   createEventElem.dataset.eventId = event.id;
@@ -71,7 +77,7 @@ const createEventElement = (event) => {
 
 export const renderEvents = () => {
   const startDay = getItem("displayedWeekStart");
-  const eventsArr = getItem("events");
+  const eventsArr = getItem("events") || [];
   let options = new Intl.DateTimeFormat("default", {
     year: "numeric",
     month: "long",
@@ -80,8 +86,14 @@ export const renderEvents = () => {
 
   let thisWeekEvents = eventsArr.filter((obj) => {
     for (let day = 0; day <= 6; day++) {
+      // console.log(
+      //   options.format(
+      //     options.format(shmoment(startDay).add("days", day).result())
+      //   )
+      // );
+
       if (
-        options.format(obj.start) ===
+        options.format(new Date(obj.start)) ===
         options.format(shmoment(startDay).add("days", day).result())
       ) {
         return obj;
@@ -93,8 +105,11 @@ export const renderEvents = () => {
 
   thisWeekEvents.map((eventFromArr) => {
     [...calendarTimeSlot].map((calendarDay) => {
-      if (Number(calendarDay.dataset.day) === eventFromArr.start.getDate()) {
-        let min = String(eventFromArr.start.getHours());
+      if (
+        Number(calendarDay.dataset.day) ===
+        new Date(eventFromArr.start).getDate()
+      ) {
+        let min = String(new Date(eventFromArr.start).getHours());
 
         let divInsideCalendarDay = calendarDay.querySelectorAll("div");
 
@@ -118,7 +133,7 @@ export const renderEvents = () => {
 };
 
 function onDeleteEvent() {
-  let ArrEvents = getItem("events");
+  let ArrEvents = getItem("events") || [];
   let eventIdToDelete = getItem("eventIdToDelete");
 
   let newArrEvents = ArrEvents.filter((el) => {

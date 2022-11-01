@@ -27,19 +27,17 @@ const onChangeWeek = (event) => {
     .direction;
 
   if (dataAtribut === "prev") {
-    const getNewDate = new Date(
-      getItem("displayedWeekStart").setDate(
-        getItem("displayedWeekStart").getDate() - 7
-      )
+    const getNewDate = new Date(getItem("displayedWeekStart")).setDate(
+      new Date(getItem("displayedWeekStart")).getDate() - 7
     );
+
     setItem("displayedWeekStart", getNewDate);
   }
   if (dataAtribut === "next") {
-    const getNewDate = new Date(
-      getItem("displayedWeekStart").setDate(
-        getItem("displayedWeekStart").getDate() + 7
-      )
+    const getNewDate = new Date(getItem("displayedWeekStart")).setDate(
+      new Date(getItem("displayedWeekStart")).getDate() + 7
     );
+
     setItem("displayedWeekStart", getNewDate);
   }
 

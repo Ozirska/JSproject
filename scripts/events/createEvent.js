@@ -27,7 +27,7 @@ function onCreateEvent(event) {
     (acc, [field, value]) => ({ ...acc, [field]: value }),
     {}
   );
-  let result = getItem("events");
+  let result = getItem("events") || [];
   const eventObject = {
     id: Math.random().toString(36).substr(2, 9),
     title: formEvent.title,
