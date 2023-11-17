@@ -15,3 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   initEventForm();
 });
+element = document.querySelector(".event__content");
+
+const onStorageChange = (e) => {
+  renderWeek();
+  renderHeader();
+  initNavigation();
+  initEventForm();
+};
+document.addEventListener("storage", onStorageChange);
