@@ -7,7 +7,11 @@ const daysOfWeek = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 const headerWeekDay = () => {
   const dateOfWeek = [];
   generateWeekRange(getItem("displayedWeekStart")).map((weekDate) =>
-    dateOfWeek.push([daysOfWeek[weekDate.getDay()], weekDate.getDate()])
+    dateOfWeek.push([
+      daysOfWeek[weekDate.getDay()],
+      weekDate.getDate(),
+      new Date(weekDate),
+    ])
   );
   return dateOfWeek;
 };
@@ -16,12 +20,20 @@ const headeLine = document.querySelector(".calendar__header");
 
 export const renderHeader = () => {
   const weekLine = headerWeekDay()
-    .map(
-      (day) =>
-        `<div class="calendar__day-label day-label">
-        ${`<span class="day-label__day-name">${day[0]}</span>`}
-        ${`<span class="day-label__day-number">${day[1]}</span>`}</div>`
-    )
+    .map((day) => {
+      let isToday =
+        new Date(day[2]).getDate() === new Date().getDate() &&
+        new Date(day[2]).getMonth() === new Date().getMonth() &&
+        new Date(day[2]).getFullYear() === new Date().getFullYear();
+
+      return `<div class="calendar__day-label day-label">
+        ${`<span class="day-label__day-name ${isToday ? "today" : ""}">${
+          day[0]
+        }</span>`}
+        ${`<span class="day-label__day-number ${isToday ? "today" : ""}">${
+          day[1]
+        }</span>`}</div>`;
+    })
 
     .join("");
 
