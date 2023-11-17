@@ -1,6 +1,4 @@
 .page {
-  height: 100vh;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -42,7 +40,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #cccccc45;
+  background-color: rgba(204, 204, 204, 0.2705882353);
   z-index: 10;
 }
 
@@ -52,6 +50,7 @@
 
 .header {
   display: flex;
+  align-items: center;
   padding: 20px;
 }
 
@@ -114,18 +113,37 @@
 }
 .calendar__time-slot {
   height: 60px;
-  border-left: 1px solid #7c7c7c;
-  border-bottom: 1px solid #7c7c7c;
+  border-left: 1px solid rgb(124, 124, 124);
+  border-bottom: 1px solid rgb(124, 124, 124);
 }
 .calendar__time-slot-min {
   height: 10px;
+}
+
+.today {
+  color: red;
+  font-weight: bold;
+  /* Add any other styling for today's date */
+}
+
+.create-event-btn {
+  width: 140px;
+  height: 50px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: 1px solid rgba(66, 66, 240, 0.476);
+}
+
+.navigation__today-btn {
+  width: 80px;
+  height: 50px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .create-event__close-btn {
   border: none;
   transform: rotate(45deg);
   margin-left: 400px;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .event-form {
@@ -139,7 +157,7 @@
 .event-form__field:focus {
   outline: none;
   border: none;
-  border-bottom: 1px solid #4000ff3b;
+  border-bottom: 1px solid rgba(64, 0, 255, 0.231372549);
 }
 .event-form__submit-btn {
   margin-top: 15px;
@@ -147,7 +165,7 @@
   border: none;
   border-radius: 5px;
   width: 100px;
-  background-color: #4000ff3b;
+  background-color: rgba(64, 0, 255, 0.231372549);
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
@@ -160,12 +178,13 @@
 .event__content {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 100%;
   height: 100px;
   border-radius: 20px;
-  background-color: #369c9c;
+  background-color: #6d48da;
   position: absolute;
   z-index: 10;
+  padding: 5px;
 }
 .event__content-span {
   background: none;
@@ -174,20 +193,28 @@
   font-size: 30px;
 }
 
+.modal_container {
+  width: 100vw;
+  height: 100vh;
+}
+
 .popup__content {
-  width: 200px;
+  width: 180px;
   height: 50px;
   position: relative;
   z-index: 11;
+  border-radius: 5px;
 }
 
 .delete-event-btn {
-  width: 200px;
+  width: 180px;
   height: 50px;
-  background-color: azure;
-  border-radius: 8px;
+  background-color: rgb(255, 240, 240);
+  border: 2px solid rgba(226, 93, 93, 0.899);
+  border-radius: 5px;
   font-weight: 800;
   font-size: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 * {
@@ -200,6 +227,11 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=styles.css.map */

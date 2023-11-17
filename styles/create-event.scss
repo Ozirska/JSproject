@@ -1,8 +1,27 @@
+.today {
+  color: red;
+  font-weight: bold;
+  /* Add any other styling for today's date */
+}
+
+.create-event-btn {
+  width: 140px;
+  height: 50px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: 1px solid rgba(66, 66, 240, 0.476);
+}
+
+.navigation__today-btn {
+  width: 80px;
+  height: 50px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 .create-event__close-btn {
   border: none;
   transform: rotate(45deg);
   margin-left: 400px;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 .event-form {
   display: flex;
